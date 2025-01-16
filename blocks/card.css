@@ -18,6 +18,9 @@
   font-size: 20px;
   font-weight: 500;
   line-height: 2.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .card__like-button {
