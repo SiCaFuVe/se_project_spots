@@ -16,4 +16,4 @@ The website should appear as an Image sharing site, with the ability of writing 
 
 This websiteis deployed to GitHub Pages.
 
-Link: https://sicafuve.github.io/se_project_spots/
+[Deployment Link](https://sicafuve.github.io/se_project_spots/)
