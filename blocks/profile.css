@@ -54,11 +54,11 @@
   font-size: 16px;
   font-weight: 500;
   border: none;
+  cursor: pointer;
 }
 
 .profile__edit-button:hover {
   color: black;
-  cursor: pointer;
 }
 
 .profile__edit-button-icon {
@@ -73,6 +73,8 @@
   max-height: 52px;
   max-width: 149px;
   display: inline-block;
+  transition: color 0.5s;
+  cursor: pointer;
 }
 
 .profile__add-button:hover {

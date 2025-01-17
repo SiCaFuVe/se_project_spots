@@ -33,7 +33,7 @@
   opacity: 40%;
 }
 
-.card__like-button {
+.card__like-button:hover {
   cursor: pointer;
   color: black;
 }
