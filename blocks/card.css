@@ -3,7 +3,7 @@
   width: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 .card__content {
@@ -18,7 +18,7 @@
   font-size: 20px;
   font-weight: 500;
   max-width: 353x;
-  line-height: 2.4;
+  line-height: 1.2;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -35,7 +35,7 @@
 
 .card__like-button:hover {
   cursor: pointer;
-  color: black;
+  opacity: 100%;
 }
 
 @media screen and (max-width: 627px) {
