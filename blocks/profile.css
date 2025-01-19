@@ -1,7 +1,7 @@
 .profile {
   display: flex;
   padding: 34px 0 20px;
-  border-bottom: 1px rgba (33, 33, 33, 0.4) solid;
+  border-bottom: 1px rgba(33, 33, 33, 0.4) solid;
   max-width: 1280px;
 }
 
@@ -15,7 +15,7 @@
 .profile__column {
   display: flex;
   flex-direction: column;
-  margin: right 20px;
+  margin-right: 20px;
 }
 
 .profile__name {
@@ -36,7 +36,7 @@
   margin: 0;
   font-size: 16px;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1;
   opacity: 70%;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -55,7 +55,7 @@
   text-align: left;
   text-decoration: none;
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1;
   font-weight: 500;
   border: none;
   cursor: pointer;
@@ -71,11 +71,16 @@
 .profile__add-button {
   margin-left: auto;
   background-color: #212121;
+  font-family: "poppins", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
   border-radius: 8px;
   color: #fcf5e5;
   height: 52px;
   width: 149px;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
   transition: color 0.5s;
   cursor: pointer;
   align-self: end;

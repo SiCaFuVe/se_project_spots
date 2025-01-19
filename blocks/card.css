@@ -11,6 +11,7 @@
   align-items: center;
   justify-content: space-between;
   text-decoration: none;
+  margin-top: 12px;
 }
 
 .card__title {
@@ -22,7 +23,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  margin: 8px 0;
+  margin: 0;
 }
 
 .card__like-button {
@@ -46,6 +47,7 @@
 
   .card__title {
     font-size: 16px;
-    line-height: 1.2;
+    line-height: 1;
+    width: 245px;
   }
 }
