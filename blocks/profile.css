@@ -23,6 +23,7 @@
   font-weight: 500;
   font-size: 32px;
   line-height: 1;
+  color: #212121;
   text-overflow: ellipsis;
   overflow: hidden;
   line-clamp: 3;
@@ -36,6 +37,7 @@
   margin: 0;
   font-size: 16px;
   font-weight: 500;
+  color: #212121;
   line-height: 1;
   opacity: 70%;
   text-overflow: ellipsis;
@@ -130,7 +132,7 @@
   }
 
   .profile__edit-button {
-    justify-self: center;
+    justify-content: center;
   }
 
   .profile__add-button {
