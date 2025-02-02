@@ -9,11 +9,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  visibility: visible;
-  padding: 0 16px;
+  padding: 0 20px;
+  visibility: hidden;
 }
 
-.modal__opened {
+.modal_opened {
   visibility: visible;
 }
 
@@ -33,10 +33,9 @@
   right: 50px;
   width: 40px;
   height: 40px;
-}
-
-.modal__close-btn-icon {
-  position: absolute;
+  border-style: hidden;
+  background-color: transparent;
+  background-image: url(../images/closeicon.svg);
 }
 
 .modal__title {
