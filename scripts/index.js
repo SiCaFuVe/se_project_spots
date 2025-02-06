@@ -50,7 +50,7 @@ function getCardElement(data) {
 
   cardNameEl.textContent = data.name;
   cardImageEl.src = data.link; // image from the list
-  cardImageEl.lta = data.name;
+  cardImageEl.alt = data.name;
 
   return cardElement;
 }
