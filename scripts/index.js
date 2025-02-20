@@ -56,10 +56,21 @@ function getCardElement(data) {
 
   const cardNameEl = cardElement.querySelector(".card__title");
   const cardImageEl = cardElement.querySelector(".card__image");
+  const cardLikeBtn = cardElement.querySelector(".card__like-button");
+
+  // to do: select delete button
+  // set listener
+  //the handler should remove the card from the DOM
+  // style delete button on CSS
 
   cardNameEl.textContent = data.name;
   cardImageEl.src = data.link; // image from the list
   cardImageEl.alt = data.name;
+
+  cardLikeBtn.addEventListener("click", () => {
+    cardLikeBtn.classList.toggle("card__like-button-liked");
+  });
+  //write code that handles the event
 
   return cardElement;
 }
