@@ -49,6 +49,10 @@ const cardsList = document.querySelector(".cards__list");
 const cardNameInput = cardModal.querySelector("#add-card-name-input");
 const cardLinkInput = cardModal.querySelector("#add-card-link-input");
 
+const previewModal = document.querySelector("#preview-modal");
+const previewModalImageEl = previewModal.querySelector(".modal__image");
+const previewModalCaptionEl = previewModal.querySelector(".modal__caption");
+
 function getCardElement(data) {
   const cardElement = cardTemplate.content
     .querySelector(".cards")
@@ -63,13 +67,20 @@ function getCardElement(data) {
   cardImageEl.src = data.link; // image from the list
   cardImageEl.alt = data.name;
 
+  previewModalImageEl.src = data.link;
+  previewModalCaptionEl.textContent = data.name;
+  previewModalImageEl.alt = data.name;
+
   cardLikeBtn.addEventListener("click", () => {
     cardLikeBtn.classList.toggle("card__like-button-liked");
   });
 
-  //write code that handles the event
   cardDeleteBtn.addEventListener("click", () => {
     cardElement.remove("card__trash-button");
+  });
+
+  cardImageEl.addEventListener("click", () => {
+    openModal(previewModal);
   });
 
   return cardElement;
