@@ -52,6 +52,9 @@ const cardLinkInput = cardModal.querySelector("#add-card-link-input");
 const previewModal = document.querySelector("#preview-modal");
 const previewModalImageEl = previewModal.querySelector(".modal__image");
 const previewModalCaptionEl = previewModal.querySelector(".modal__caption");
+const previewModalDeleteBtn = previewModal.querySelector(
+  ".modal__close-btn_preview"
+);
 
 function getCardElement(data) {
   const cardElement = cardTemplate.content
@@ -77,6 +80,11 @@ function getCardElement(data) {
 
   cardDeleteBtn.addEventListener("click", () => {
     cardElement.remove("card__trash-button");
+  });
+
+  //previewModal Delete Btn Event
+  previewModalDeleteBtn.addEventListener("click", () => {
+    previewModal.remove("preview-modal");
   });
 
   cardImageEl.addEventListener("click", () => {
