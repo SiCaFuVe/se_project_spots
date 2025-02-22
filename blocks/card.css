@@ -1,3 +1,7 @@
+.card {
+  position: relative;
+}
+
 .card__image {
   height: 413px;
   width: 100%;
@@ -47,6 +51,26 @@
 }
 .card__like-button-liked:hover {
   background-image: url(../images/likedhovered.svg);
+}
+
+.card__trash-button {
+  background-image: url(../images/trash.svg);
+  cursor: pointer;
+  background-size: contain;
+  width: 32px;
+  height: 32px;
+  margin-top: 20px;
+  top: 10px;
+  right: 10px;
+  left: 371px;
+  position: absolute;
+  color: rgba(0, 0, 0, 0.3);
+  background-color: transparent;
+  border: none;
+}
+
+.card__trash-button:hover {
+  background-image: url(../images/trash-hover.svg);
 }
 
 @media screen and (max-width: 627px) {
