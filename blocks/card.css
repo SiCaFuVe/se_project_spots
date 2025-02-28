@@ -48,9 +48,11 @@
 .card__like-button-liked {
   background-image: url(../images/likedheart.svg);
   opacity: 100%;
+  background-repeat: no-repeat;
 }
 .card__like-button-liked:hover {
   background-image: url(../images/likedhovered.svg);
+  background-repeat: no-repeat;
 }
 
 .card__trash-button {
@@ -82,5 +84,12 @@
     font-size: 16px;
     line-height: 1;
     width: 245px;
+  }
+
+  .card__trash-button {
+    width: 32px;
+    height: 32px;
+    top: 10px;
+    left: 226px;
   }
 }

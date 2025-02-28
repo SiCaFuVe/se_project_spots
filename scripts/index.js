@@ -52,8 +52,8 @@ const cardLinkInput = cardModal.querySelector("#add-card-link-input");
 const previewModal = document.querySelector("#preview-modal");
 const previewModalImageEl = previewModal.querySelector(".modal__image");
 const previewModalCaptionEl = previewModal.querySelector(".modal__caption");
-const previewModalDeleteBtn = previewModal.querySelector(
-  ".modal__close-btn_preview"
+const previewModalCloseBtn = previewModal.querySelector(
+  ".modal__close-btn-preview"
 );
 
 function getCardElement(data) {
@@ -70,21 +70,27 @@ function getCardElement(data) {
   cardImageEl.src = data.link; // image from the list
   cardImageEl.alt = data.name;
 
-  previewModalImageEl.src = data.link;
-  previewModalCaptionEl.textContent = data.name;
-  previewModalImageEl.alt = data.name;
+  cardImageEl.addEventListener("click", () => {
+    previewModalImageEl.src = cardImageEl.src;
+    previewModalCaptionEl.textContent = cardNameEl.textContent;
+    previewModalImageEl.alt = cardNameEl.textContent;
+  });
+
+  //previewModalImageEl.src = data.link;
+  //previewModalCaptionEl.textContent = data.name;
+  //previewModalImageEl.alt = data.name;
 
   cardLikeBtn.addEventListener("click", () => {
     cardLikeBtn.classList.toggle("card__like-button-liked");
   });
 
   cardDeleteBtn.addEventListener("click", () => {
-    cardElement.remove("card__trash-button");
+    cardElement.remove();
   });
 
   //previewModal Delete Btn Event
-  previewModalDeleteBtn.addEventListener("click", () => {
-    previewModal.remove("preview-modal");
+  previewModalCloseBtn.addEventListener("click", () => {
+    closeModal(previewModal);
   });
 
   cardImageEl.addEventListener("click", () => {
@@ -117,6 +123,10 @@ function handleCardSubmit(evt) {
   closeModal(cardModal);
 }
 
+// Should I do this instead or how I add it?
+// function handleCardSubmit(evt) {
+//evt.target.reset();  }
+
 profileEditButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
   editModalDescriptionInput.value = profileDescription.textContent;
@@ -126,8 +136,6 @@ profileEditButton.addEventListener("click", () => {
 editModalCloseBtn.addEventListener("click", () => {
   closeModal(editModal);
 });
-
-editFormElement.addEventListener("submit", handleEditFormSubmit);
 
 cardModalBtn.addEventListener("click", () => {
   openModal(cardModal);
