@@ -138,6 +138,8 @@ editModalCloseBtn.addEventListener("click", () => {
 });
 
 cardModalBtn.addEventListener("click", () => {
+  cardNameInput.value = "";
+  cardLinkInput.value = "";
   openModal(cardModal);
 });
 
