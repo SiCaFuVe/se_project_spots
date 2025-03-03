@@ -121,11 +121,9 @@ function handleCardSubmit(evt) {
   const cardEl = getCardElement(inputValues);
   cardsList.prepend(cardEl);
   closeModal(cardModal);
+  cardNameInput.value = "";
+  cardLinkInput.value = "";
 }
-
-// Should I do this instead or how I add it?
-// function handleCardSubmit(evt) {
-//evt.target.reset();  }
 
 profileEditButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
@@ -138,8 +136,6 @@ editModalCloseBtn.addEventListener("click", () => {
 });
 
 cardModalBtn.addEventListener("click", () => {
-  cardNameInput.value = "";
-  cardLinkInput.value = "";
   openModal(cardModal);
 });
 
