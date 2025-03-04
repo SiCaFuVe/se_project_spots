@@ -71,14 +71,11 @@ function getCardElement(data) {
   cardImageEl.alt = data.name;
 
   cardImageEl.addEventListener("click", () => {
+    openModal(previewModal);
     previewModalImageEl.src = cardImageEl.src;
     previewModalCaptionEl.textContent = cardNameEl.textContent;
     previewModalImageEl.alt = cardNameEl.textContent;
   });
-
-  //previewModalImageEl.src = data.link;
-  //previewModalCaptionEl.textContent = data.name;
-  //previewModalImageEl.alt = data.name;
 
   cardLikeBtn.addEventListener("click", () => {
     cardLikeBtn.classList.toggle("card__like-button-liked");
@@ -88,17 +85,12 @@ function getCardElement(data) {
     cardElement.remove();
   });
 
-  //previewModal Delete Btn Event
-  previewModalCloseBtn.addEventListener("click", () => {
-    closeModal(previewModal);
-  });
-
-  cardImageEl.addEventListener("click", () => {
-    openModal(previewModal);
-  });
-
   return cardElement;
 }
+
+previewModalCloseBtn.addEventListener("click", () => {
+  closeModal(previewModal);
+});
 
 //Functions
 function openModal(modal) {
