@@ -1,15 +1,24 @@
+const settings = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__submit-btn",
+  inactiveButtonClass: "modal__submit-btn_disabled",
+  inputErrorClass: "modal__input_type_error",
+  // errorClass: "modal__error_visible", idk where i use this?
+};
+
 const showInputError = (formEl, inputElement, errorMsg) => {
   const errorMsgID = inputElement.id + "-error";
-  const errorMsgEl = formEl.querySelector("#" + errorMsgID);
+  const errorMsgEl = formEl.querySelector("#" + errorMsgID); //(config.inputErrorClass)
   errorMsgEl.textContent = errorMsg;
-  inputElement.classList.add(".modal__input_type_error");
+  inputElement.classList.add("modal__input_type_error"); //(config.inputErrorClass)
 };
 
 const hideInputError = (formEl, inputElement) => {
   const errorMsgID = inputElement.id + "-error";
   const errorMsgEl = formEl.querySelector("#" + errorMsgID);
   errorMsgEl.textContent = "";
-  inputElement.classList.remove(".modal__input_type_error");
+  inputElement.classList.remove("modal__input_type_error"); //(config.inputErrorClass) should i pass it up in hide error()
 };
 
 const checkInputValidity = (formEl, inputElement) => {
@@ -21,26 +30,56 @@ const checkInputValidity = (formEl, inputElement) => {
   }
 };
 
-const setEventListeners = (formEl) => {
-  const inputList = formEl.querySelectorAll(".modal__input");
-  const buttonElement = formEl.querySelectorAll(".modal__submit-btn");
+const hasInvalidInput = (inputList) => {
+  return inputList.some((input) => {
+    return !input.validity.valid;
+  });
+};
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    disableButton(buttonElement);
+    // toggleButtonState.classList.add("modal__submit-btn_disabled");
+    // add a modifier class to the buttonElement to make it gray (css)
+  } else {
+    buttonElement.disabled = false;
+  }
+};
+
+const disableButton = (buttonElement) => {
+  buttonElement.disabled = true;
+  // toggleButtonState.classList.remove("modal__submit-btn_disabled");
+  //remove disabled class
+};
+
+const resetValidation = (formEl, inputList) => {
+  inputList.forEach((input) => {
+    hideInputError(formEl, input);
+  });
+};
+
+const setEventListeners = (formEl, config) => {
+  const inputList = Array.from(formEl.querySelectorAll(config.inputSelector));
+  const buttonElement = formEl.querySelectorAll(config.submitButtonSelector);
 
   //handle initial state
-  // toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
-      checkInputValidity(formEl, inputElement);
-      // toggleButtonState(inputList, buttonElement);
+      checkInputValidity(formEl, inputElement, config);
+      toggleButtonState(inputList, buttonElement, config);
     });
   });
 };
 
-const enableValidation = () => {
-  const formList = document.querySelectorAll(".modal__form");
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formEl) => {
     setEventListeners(formEl);
   });
 };
 
-enableValidation();
+enableValidation(settings);
+
+//where else shoud i add the config
