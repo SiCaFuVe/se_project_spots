@@ -4,21 +4,21 @@ const settings = {
   submitButtonSelector: ".modal__submit-btn",
   inactiveButtonClass: "modal__submit-btn_disabled",
   inputErrorClass: "modal__input_type_error",
-  // errorClass: "modal__error_visible", idk where i use this?
+  errorClass: "modal__error_visible",
 };
 
 const showInputError = (formEl, inputElement, errorMsg) => {
   const errorMsgID = inputElement.id + "-error";
-  const errorMsgEl = formEl.querySelector("#" + errorMsgID); //(config.inputErrorClass)
+  const errorMsgEl = formEl.querySelector("#" + errorMsgID);
   errorMsgEl.textContent = errorMsg;
-  inputElement.classList.add("modal__input_type_error"); //(config.inputErrorClass)
+  inputElement.classList.add("modal__input_type_error");
 };
 
 const hideInputError = (formEl, inputElement) => {
   const errorMsgID = inputElement.id + "-error";
   const errorMsgEl = formEl.querySelector("#" + errorMsgID);
   errorMsgEl.textContent = "";
-  inputElement.classList.remove("modal__input_type_error"); //(config.inputErrorClass) should i pass it up in hide error()
+  inputElement.classList.remove("modal__input_type_error");
 };
 
 const checkInputValidity = (formEl, inputElement) => {
@@ -39,7 +39,6 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     disableButton(buttonElement);
-    // add a modifier class to the buttonElement to make it gray (css)
   } else {
     buttonElement.disabled = false;
     buttonElement.classList.remove("modal__submit-btn_disabled");
@@ -49,7 +48,6 @@ const toggleButtonState = (inputList, buttonElement) => {
 const disableButton = (buttonElement) => {
   buttonElement.disabled = true;
   buttonElement.classList.add("modal__submit-btn_disabled");
-  //remove disabled class
 };
 
 const resetValidation = (formEl, inputList) => {
@@ -62,7 +60,6 @@ const setEventListeners = (formEl, config) => {
   const inputList = Array.from(formEl.querySelectorAll(config.inputSelector));
   const buttonElement = formEl.querySelector(config.submitButtonSelector);
 
-  //handle initial state
   toggleButtonState(inputList, buttonElement);
 
   inputList.forEach((inputElement) => {
@@ -81,5 +78,3 @@ const enableValidation = (config) => {
 };
 
 enableValidation(settings);
-
-//where else shoud i add the config at index.js

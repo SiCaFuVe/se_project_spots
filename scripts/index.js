@@ -68,7 +68,7 @@ function getCardElement(data) {
   const cardDeleteBtn = cardElement.querySelector(".card__trash-button");
 
   cardNameEl.textContent = data.name;
-  cardImageEl.src = data.link; // image from the list
+  cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
 
   cardImageEl.addEventListener("click", () => {
@@ -113,7 +113,7 @@ function handleCardSubmit(evt) {
   const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
   const cardEl = getCardElement(inputValues);
   cardsList.prepend(cardEl);
-  // disableButton(cardSubmitButton);
+  // disableButton(cardSubmitButton); optional
   closeModal(cardModal);
   cardNameInput.value = "";
   cardLinkInput.value = "";
