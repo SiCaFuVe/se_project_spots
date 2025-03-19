@@ -39,16 +39,16 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     disableButton(buttonElement);
-    // toggleButtonState.classList.add("modal__submit-btn_disabled");
     // add a modifier class to the buttonElement to make it gray (css)
   } else {
     buttonElement.disabled = false;
+    buttonElement.classList.remove("modal__submit-btn_disabled");
   }
 };
 
 const disableButton = (buttonElement) => {
   buttonElement.disabled = true;
-  // toggleButtonState.classList.remove("modal__submit-btn_disabled");
+  buttonElement.classList.add("modal__submit-btn_disabled");
   //remove disabled class
 };
 
@@ -60,7 +60,7 @@ const resetValidation = (formEl, inputList) => {
 
 const setEventListeners = (formEl, config) => {
   const inputList = Array.from(formEl.querySelectorAll(config.inputSelector));
-  const buttonElement = formEl.querySelectorAll(config.submitButtonSelector);
+  const buttonElement = formEl.querySelector(config.submitButtonSelector);
 
   //handle initial state
   toggleButtonState(inputList, buttonElement);
@@ -76,10 +76,10 @@ const setEventListeners = (formEl, config) => {
 const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formEl) => {
-    setEventListeners(formEl);
+    setEventListeners(formEl, config);
   });
 };
 
 enableValidation(settings);
 
-//where else shoud i add the config
+//where else shoud i add the config at index.js
