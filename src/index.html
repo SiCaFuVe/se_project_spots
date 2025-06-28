@@ -6,7 +6,7 @@
     <meta name="description" content="Spots app" />
     <meta name="keywords" content="pictures" />
     <meta name="author" content="Carolina Fuentes " />
-    <link rel="stylesheet" href="./pages/index.css" />
+
     <link rel="shortcut icon" href="./favicon.ico" />
     <title>Spots</title>
   </head>
@@ -14,7 +14,7 @@
     <div class="page">
       <header class="header">
         <img
-          src="./images/spotslogo.svg"
+          src="<%=require('./images/spotslogo.svg')%>"
           alt="Spot logo"
           class="header__logo"
         />
@@ -22,7 +22,7 @@
       <main class="main">
         <section class="profile page__section">
           <img
-            src="./images/avatar.jpg"
+            src="<%=require('./images/avatar.jpg')%>"
             alt="Bessie Coleman"
             class="profile__avatar"
           />
@@ -31,7 +31,7 @@
             <p class="profile__description">Civil Aviator</p>
             <button type="button" class="profile__edit-button">
               <img
-                src="./images/pencil.svg"
+                src="<%=require('./images/pencil.svg')%>"
                 alt="pencil icon"
                 class="profile__edit-button-icon"
               />
@@ -40,7 +40,7 @@
           </div>
           <button type="button" class="profile__add-button">
             <img
-              src="./images/plusicon.svg"
+              src="<%=require('./images/plusicon.svg')%>"
               alt="plus icon"
               class="profile__add-button-icon"
             />
@@ -162,7 +162,5 @@
         <p class="modal__caption"></p>
       </div>
     </div>
-    <script defer src="./scripts/validation.js"></script>
-    <script defer src="./scripts/index.js"></script>
   </body>
 </html>
