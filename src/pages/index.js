@@ -1,48 +1,27 @@
-import "./index.css";
-import { enableValidation, settings } from "../scripts/validation";
+import "../pages/index.css";
+import { enableValidation, settings } from "../scripts/validation.js";
 import Api from "../utils/Api.js";
-
-const initialCards = [
-  {
-    name: "Val Thorens",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg",
-  },
-  {
-    name: "Restaurant terrace",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/2-photo-by-ceiline-from-pexels.jpg",
-  },
-  {
-    name: "An outdoor cafe",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/3-photo-by-tubanur-dogan-from-pexels.jpg",
-  },
-  {
-    name: "A very long bridge, over the forest and through the trees",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/4-photo-by-maurice-laschet-from-pexels.jpg",
-  },
-  {
-    name: "Tunnel with morning light",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/5-photo-by-van-anh-nguyen-from-pexels.jpg",
-  },
-  {
-    name: "Mountain house",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
-  },
-];
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "73c14870-3747-400d-aa7e-47b650676870",
+    authorization: "1eabdba8-c02d-4ba2-a779-4636a4dadf09",
     "Content-Type": "application/json",
   },
 });
 
-api.getInitialCards().then((initialCards) => {
-  initialCards.forEach((item) => {
-    const cardElement = getCardElement(item);
-    cardsList.prepend(cardElement);
-  });
-});
+api
+  .getAppInfo()
+  .then(([initialCards, UserInfo]) => {
+    initialCards.forEach((item) => {
+      const cardEl = getCardElement(item);
+      cardsList.apend(cardEl);
+    });
+    // Handle user information
+    // set the src of the avatar image
+    // set textContent of both text elements
+  })
+  .catch(console.error(err));
 
 //Original modal
 const modals = document.querySelectorAll(".modal");
@@ -142,9 +121,18 @@ function keyHandler(evt) {
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
-  profileName.textContent = editModalNameInput.value;
-  profileDescription.textContent = editModalDescriptionInput.value;
-  closeModal(editModal);
+  api
+    .editUserInfo({
+      name: "editModalNameInput.value",
+      about: "editModalDescriptionInput.value",
+    })
+    .then((data) => {
+      // To-Do use data argument instead of input values
+      profileName.textContent = editModalNameInput.value;
+      profileDescription.textContent = editModalDescriptionInput.value;
+      closeModal(editModal);
+    })
+    .catch(console.error);
 }
 
 function handleCardSubmit(evt) {
