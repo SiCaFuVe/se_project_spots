@@ -21,11 +21,20 @@
       </header>
       <main class="main">
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/avatar.jpg')%>"
-            alt="Bessie Coleman"
-            class="profile__avatar"
-          />
+          <div class="profile__avatar-container">
+            <button clas="profile__avatar-btn">
+              <img
+                src="<%=require('./images/wh-pencil.svg')%>"
+                alt="pencil icon"
+                class="profile__pencil-icon"
+              />
+            </button>
+            <img
+              src="<%=require('./images/avatar.jpg')%>"
+              alt="Bessie Coleman"
+              class="profile__avatar"
+            />
+          </div>
           <div class="profile__column">
             <h1 class="profile__name">Bessie Coleman</h1>
             <p class="profile__description">Civil Aviator</p>
@@ -40,7 +49,7 @@
           </div>
           <button type="button" class="profile__add-button">
             <img
-              src="./images/plusicon.svg"
+              src="<%=require('./images/plusicon.svg')%>"
               alt="plus icon"
               class="profile__add-button-icon"
             />
@@ -160,6 +169,53 @@
         ></button>
         <img src="#" class="modal__image" alt="" />
         <p class="modal__caption"></p>
+      </div>
+    </div>
+
+    <div class="modal" id="avatar-modal">
+      <div class="modal__container">
+        <button
+          aria-label="Close modal"
+          type="button"
+          class="modal__close-btn"
+        ></button>
+        <h2 class="modal__title">Edit Avatar</h2>
+        <form
+          name="avatar"
+          class="modal__form"
+          id="edit-avatar-form"
+          novalidate
+        >
+          <label for="profile-avatar-input" class="modal__label"
+            >Avatar
+            <input
+              id="profile-avatar-input"
+              class="modal__input"
+              name="avatar"
+              placeholder="Avatar goes here"
+              required
+            />
+            <span id="profile-avatar-input" class="modal__error"></span>
+          </label>
+          <button type="submit" class="modal__submit-btn">Save</button>
+        </form>
+      </div>
+    </div>
+    <!-- Todo style the modal -->
+    <div class="modal modal_opened" id="delete-modal">
+      <div class="modal__container">
+        <button
+          aria-label="Close modal"
+          type="button"
+          class="modal__close-btn"
+        ></button>
+        <h2 class="modal__title">
+          Are you sure you want to delete this image?
+        </h2>
+        <form name="avatar" class="modal__form" id="delete-form" novalidate>
+          <button type="submit" class="modal__submit-btn">Delete</button>
+          <button type="button" class="modal__submit-btn">Cancel</button>
+        </form>
       </div>
     </div>
   </body>
