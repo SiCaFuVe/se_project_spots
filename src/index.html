@@ -22,7 +22,7 @@
       <main class="main">
         <section class="profile page__section">
           <div class="profile__avatar-container">
-            <button clas="profile__avatar-btn">
+            <button class="profile__avatar-btn">
               <img
                 src="<%=require('./images/wh-pencil.svg')%>"
                 alt="pencil icon"
@@ -201,7 +201,7 @@
         </form>
       </div>
     </div>
-    <!-- Todo style the modal -->
+    <!-- Todo style the modal modal_opened to see changes -->
     <div class="modal modal_opened" id="delete-modal">
       <div class="modal__container">
         <button
@@ -213,8 +213,18 @@
           Are you sure you want to delete this image?
         </h2>
         <form name="avatar" class="modal__form" id="delete-form" novalidate>
-          <button type="submit" class="modal__submit-btn">Delete</button>
-          <button type="button" class="modal__submit-btn">Cancel</button>
+          <button
+            type="submit"
+            class="modal__submit-btn modal__submit-btn_delete"
+          >
+            Delete
+          </button>
+          <button
+            type="button"
+            class="modal__submit-btn modal__submit-btn_cancel"
+          >
+            Cancel
+          </button>
         </form>
       </div>
     </div>

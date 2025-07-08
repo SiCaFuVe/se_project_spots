@@ -55,6 +55,7 @@
   display: flex;
   flex-direction: column;
   justify-items: space-between;
+  font-size: 24px;
 }
 
 .modal__caption {
@@ -150,8 +151,17 @@
   transition: background 0.3s;
 }
 
-.modal__submit-btn_disabled {
-  opacity: 0.5;
+/* modifiers for delete and cancel */
+
+.modal__submit-btn_delete {
+  background-color: rgba(255, 101, 101, 1);
+  color: black;
+  border: none;
+}
+.modal__submit-btn_cancel {
+  background-color: #fcf5e5;
+  color: black;
+  border: 1px;
 }
 
 .modal__close-btn:hover {

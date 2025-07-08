@@ -1,5 +1,9 @@
 import "../pages/index.css";
-import { enableValidation, settings } from "../scripts/validation.js";
+import {
+  enableValidation,
+  settings,
+  resetValidation,
+} from "../scripts/validation.js";
 import Api from "../utils/Api.js";
 
 const api = new Api({
@@ -15,15 +19,14 @@ api
   .then(([initialCards, userInfo]) => {
     initialCards.forEach((item) => {
       const cardEl = getCardElement(item);
-      cardsList.apend(cardEl);
+      cardsList.append(cardEl);
     });
-    // userInfo.
     console.log(userInfo);
-    // Handle user information
-    // set the src of the avatar image
-    // set textContent of both text elements
+    profileName.textContent = userInfo.name;
+    profileDescription.textContent = userInfo.about;
+    avatarImage.src = userInfo.avatar;
   })
-  .catch(console.error(err));
+  .catch(console.error);
 
 //Original modal
 const modals = document.querySelectorAll(".modal");
@@ -31,7 +34,8 @@ const modals = document.querySelectorAll(".modal");
 //profile elements
 const profileEditButton = document.querySelector(".profile__edit-button");
 const cardModalBtn = document.querySelector(".profile__add-button");
-const avatarModalBtn = document.querySelector(".profile__avatar-button");
+const avatarModalBtn = document.querySelector(".profile__avatar-btn");
+const avatarImage = document.querySelector(".profile__avatar");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 
@@ -60,7 +64,6 @@ const avatarForm = avatarModal.querySelector(".modal__form");
 const avatarSubmitButton = avatarModal.querySelector(".modal__submit-btn");
 const avatarModalCloseBtn = avatarModal.querySelector(".modal__close-btn");
 const avatarLinkInput = avatarModal.querySelector("#profile-avatar-input");
-// call avatar and quetry select, avatar element profile__avatar
 
 // Delete form elements
 const deleteModal = document.querySelector("#delete-modal");
@@ -145,13 +148,13 @@ function handleEditFormSubmit(evt) {
   evt.preventDefault();
   api
     .editUserInfo({
-      name: "editModalNameInput.value",
-      about: "editModalDescriptionInput.value",
+      name: editModalNameInput.value,
+      about: editModalDescriptionInput.value,
     })
     .then((data) => {
-      // To-Do use data argument instead of input values
-      profileName.textContent = editModalNameInput.value;
-      profileDescription.textContent = editModalDescriptionInput.value;
+      profileName.textContent = data.name;
+      profileDescription.textContent = data.about;
+      console.log(data);
       closeModal(editModal);
     })
     .catch(console.error);
@@ -168,7 +171,7 @@ function handleDeleteSubmit(evt) {
   api
     .deleteCard(selectedCardId)
     .then(() => {
-      // remove card from the DOM
+      // selectedCard.remove
     })
     .catch(console.error);
   closeModal();
@@ -188,7 +191,7 @@ function handleCardSubmit(evt) {
   cardLinkInput.value = "";
 }
 
-// finish avatar submissiohn handler
+// finish avatar submision handler
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
   api.editAvatarInfo(avatarInput.value).then((data) => {
