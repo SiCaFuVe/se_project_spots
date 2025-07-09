@@ -80,7 +80,7 @@ class Api {
 
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
-      method: "DELTE",
+      method: "DELETE",
       headers: this._headers,
     }).then((res) => {
       if (res.ok) {
@@ -92,7 +92,7 @@ class Api {
 
   changeLikeStatus(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-      method: isLiked ? "DELETE" : "PUT",
+      method: isLiked ? "PUT" : "DELETE",
       headers: this._headers,
     }).then((res) => {
       if (res.ok) {

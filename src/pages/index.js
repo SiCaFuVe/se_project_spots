@@ -58,6 +58,8 @@ const cardNameInput = cardModal.querySelector("#add-card-name-input");
 const cardLinkInput = cardModal.querySelector("#add-card-link-input");
 const cardSubmitButton = cardModal.querySelector(".modal__submit-btn");
 
+// to- do - if the card is liked, set the active class on the card
+
 // Avatar form Elements
 const avatarModal = document.querySelector("#avatar-modal");
 const avatarForm = avatarModal.querySelector(".modal__form");
@@ -100,7 +102,7 @@ function getCardElement(data) {
     previewModalImageEl.alt = cardNameEl.textContent;
   });
 
-  cardLikeBtn.addEventListener("click", () => handleLike(data._id));
+  cardLikeBtn.addEventListener("click", (evt) => handleLike(evt, data._id));
 
   cardImageEl.addEventListener("click", () => handleImageClick(data));
 
@@ -132,7 +134,25 @@ modals.forEach((modals) => {
   });
 });
 
-function handleLike(evt) {
+function handleLike(evt, id) {
+  // const LIKEBUTTON =  evt.targe:
+  // const isLiked = likeButton.classList.contains("card__like-button-liked"),
+  // api
+  // .changeLikeStatus( id, !isLiked)
+  // .then ((updatedCardData))
+  // likeButton.classList.toggle("card__like-button-liked, !isLiked");
+  //   const likeCountEl = likeButton
+  //         .closest(".cards")
+  //         .querySelector(".card__like-count");
+
+  //       if (likeCountEl) {
+  //         likeCountEl.textContent = updatedCardData.likes.length;
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.error("Failed to toggle like:", err);
+  //     });
+  // }
   evt.target.classList.toggle("card__like-button-liked");
 }
 
@@ -194,8 +214,9 @@ function handleCardSubmit(evt) {
 // finish avatar submision handler
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
-  api.editAvatarInfo(avatarInput.value).then((data) => {
+  api.editAvatarInfo(avatarLinkInput.value).then((data) => {
     console.log(data.avatar);
+    //
     // set the new avatar element src of avatar images
   });
 }
@@ -218,7 +239,7 @@ cardModalBtn.addEventListener("click", () => {
 avatarModalBtn.addEventListener("click", () => {
   openModal(avatarModal);
 });
-// to-do: make sure form validation works and close modal
+// to-do: make sure form validation works and close modal (i think it works)
 avatarForm.addEventListener("submit", handleAvatarSubmit);
 
 editFormElement.addEventListener("submit", handleEditFormSubmit);
