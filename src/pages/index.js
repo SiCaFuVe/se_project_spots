@@ -136,20 +136,20 @@ modals.forEach((modals) => {
 });
 
 function handleLike(evt, id) {
-  // const likeBtn =  evt.target;
-  // const isLiked = likeButton.classList.contains("card__like-button-liked");
-  // api
-  // .changeLikeStatus( id, !isLiked)
-  // .then ((updatedCardData))
-  // likeButton.classList.toggle("card__like-button-liked, !isLiked");
-  //   const likeCountEl = likeButton
-  //         .closest(".cards")
-  //     }
-  //     .catch((err) => {
-  //       console.error("Failed to toggle like:", err);
-  //     });
-
-  evt.target.classList.toggle("card__like-button-liked");
+  const likeBtn = evt.target;
+  const isLiked = likeBtn.classList.contains("card__like-button-liked");
+  api
+    .changeLikeStatus(id, !isLiked)
+    .then((updatedCardData) => {
+      if (!isLiked) {
+        likeBtn.classList.add("card__likee-butto-liked");
+      } else {
+        likeBtn.classList.remove("card__like-button-liked");
+      }
+    })
+    .catch((err) => {
+      console.error("Failed to toggle like:", err);
+    });
 }
 
 // esc key
@@ -182,7 +182,7 @@ function handleEditFormSubmit(evt) {
     });
 }
 
-//implement liaing text for other form submisions
+//implement loading text for other form submisions
 
 function handleDeleteCard(cardElement, cardId) {
   selectedCard = cardElement;
@@ -195,10 +195,10 @@ function handleDeleteSubmit(evt) {
   api
     .deleteCard(selectedCardId)
     .then(() => {
-      // selectedCard.remove
+      selecteCard.remove();
+      closeModal();
     })
     .catch(console.error);
-  closeModal();
 }
 
 deleteForm.addEventListener("submit", handleDeleteSubmit);
@@ -209,20 +209,28 @@ function handleCardSubmit(evt) {
   const cardEl = getCardElement(inputValues);
   cardsList.prepend(cardEl);
   console.log(cardSubmitButton);
-  disableButton(cardSubmitButton, settings);
+  //disableButton(cardSubmitButton, settings);
   closeModal(cardModal);
   cardNameInput.value = "";
   cardLinkInput.value = "";
 }
 
-// finish avatar submision handler
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
-  api.editAvatarInfo(avatarLinkInput.value).then((data) => {
-    console.log(data.avatar);
-    //
-    // set the new avatar element src of avatar images
-  });
+  api
+    .editAvatarInfo(avatarLinkInput.value)
+    .then((data) => {
+      document.querySelector("#edit-avatar-form").src = data.avatar;
+      closeModal();
+      avatarForm.reset();
+    })
+    .catch((err) => {
+      console.error("Failed to update avatar", err);
+    });
+  // .finally(() => {
+  //   avatarSubmitButton.textContent = "save";
+  //   avatarSubmitButton.disabled = false;
+  // });
 }
 
 profileEditButton.addEventListener("click", () => {

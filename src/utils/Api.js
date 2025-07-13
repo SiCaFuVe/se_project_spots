@@ -30,7 +30,6 @@ class Api {
     });
   }
 
-  // Send new request to add new card
   postCard({ name, link }) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
@@ -90,7 +89,7 @@ class Api {
     });
   }
 
-  changeLikeStatus(id) {
+  changeLikeStatus(id, isLiked) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: isLiked ? "PUT" : "DELETE",
       headers: this._headers,
@@ -98,7 +97,7 @@ class Api {
       if (res.ok) {
         return res.json();
       }
-      Promise.reject(`Error:${res.status}`);
+      return Promise.reject(`Error:${res.status}`);
     });
   }
 }

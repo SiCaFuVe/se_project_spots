@@ -151,7 +151,7 @@
   transition: background 0.3s;
 }
 
-/* modifiers for delete and cancel */
+/* modifiers for delete and cancel how to style #delete modal */
 
 .modal__submit-btn_delete {
   background-color: rgba(255, 101, 101, 1);
