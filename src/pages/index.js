@@ -5,6 +5,7 @@ import {
   resetValidation,
 } from "../scripts/validation.js";
 import Api from "../utils/Api.js";
+import { setButtonText } from "../utils/helpers.js";
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -135,24 +136,19 @@ modals.forEach((modals) => {
 });
 
 function handleLike(evt, id) {
-  // const LIKEBUTTON =  evt.targe:
-  // const isLiked = likeButton.classList.contains("card__like-button-liked"),
+  // const likeBtn =  evt.target;
+  // const isLiked = likeButton.classList.contains("card__like-button-liked");
   // api
   // .changeLikeStatus( id, !isLiked)
   // .then ((updatedCardData))
   // likeButton.classList.toggle("card__like-button-liked, !isLiked");
   //   const likeCountEl = likeButton
   //         .closest(".cards")
-  //         .querySelector(".card__like-count");
-
-  //       if (likeCountEl) {
-  //         likeCountEl.textContent = updatedCardData.likes.length;
-  //       }
-  //     })
+  //     }
   //     .catch((err) => {
   //       console.error("Failed to toggle like:", err);
   //     });
-  // }
+
   evt.target.classList.toggle("card__like-button-liked");
 }
 
@@ -166,6 +162,9 @@ function keyHandler(evt) {
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
+  const submitBtn = evt.submitter;
+  setButtonText(submitBtn, true);
+
   api
     .editUserInfo({
       name: editModalNameInput.value,
@@ -177,8 +176,13 @@ function handleEditFormSubmit(evt) {
       console.log(data);
       closeModal(editModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText();
+    });
 }
+
+//implement liaing text for other form submisions
 
 function handleDeleteCard(cardElement, cardId) {
   selectedCard = cardElement;
