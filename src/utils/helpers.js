@@ -4,9 +4,10 @@ export function setButtonText(
   defaultText = "Save",
   loadingText = "Saving..."
 ) {
-  if (isLoading) {
-    return loadingText();
-  } else {
-    return defaultText();
+  if (!btn) {
+    console.log("setButtonText: Button is null");
   }
+  btn.textContent = isLoading ? loadingText : defaultText;
 }
+
+// check whats in the console

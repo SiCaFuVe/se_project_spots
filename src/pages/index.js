@@ -67,6 +67,7 @@ const avatarForm = avatarModal.querySelector(".modal__form");
 const avatarSubmitButton = avatarModal.querySelector(".modal__submit-btn");
 const avatarModalCloseBtn = avatarModal.querySelector(".modal__close-btn");
 const avatarLinkInput = avatarModal.querySelector("#profile-avatar-input");
+const deleteSubmitButton = document.querySelector("#modal__submit-btn_delete");
 
 // Delete form elements
 const deleteModal = document.querySelector("#delete-modal");
@@ -178,11 +179,10 @@ function handleEditFormSubmit(evt) {
     })
     .catch(console.error)
     .finally(() => {
-      setButtonText();
+      setButtonText(avatarSubmitButton, true);
+      setButtonText(avatarSubmitButton, false);
     });
 }
-
-//implement loading text for other form submisions
 
 function handleDeleteCard(cardElement, cardId) {
   selectedCard = cardElement;
@@ -192,13 +192,18 @@ function handleDeleteCard(cardElement, cardId) {
 
 function handleDeleteSubmit(evt) {
   evt.preventDefault();
+  setButtonText(deleteSubmitButton, true, "Delete", "Deleting...");
+  console.log(deleteSubmitButton); //check if it shows up
   api
     .deleteCard(selectedCardId)
     .then(() => {
-      selecteCard.remove();
+      selectedCard.remove();
       closeModal();
     })
-    .catch(console.error);
+    .catch((err) => console.error("Failed to delete card", err))
+    .finally(() => {
+      setButtonText(deleteSubmitButton, false, "Delete", "Deleting...");
+    });
 }
 
 deleteForm.addEventListener("submit", handleDeleteSubmit);
@@ -221,16 +226,15 @@ function handleAvatarSubmit(evt) {
     .editAvatarInfo(avatarLinkInput.value)
     .then((data) => {
       document.querySelector("#edit-avatar-form").src = data.avatar;
-      closeModal();
-      avatarForm.reset();
+      closeModal(avatarModal);
+      avatarForm.reset(avatarModal);
     })
     .catch((err) => {
-      console.error("Failed to update avatar", err);
+      console.error("Failed to update avatar", err).finally(() => {
+        setButtonText(avatarSubmitButton, true);
+        setButtonText(avatarSubmitButton, false);
+      });
     });
-  // .finally(() => {
-  //   avatarSubmitButton.textContent = "save";
-  //   avatarSubmitButton.disabled = false;
-  // });
 }
 
 profileEditButton.addEventListener("click", () => {
@@ -251,7 +255,7 @@ cardModalBtn.addEventListener("click", () => {
 avatarModalBtn.addEventListener("click", () => {
   openModal(avatarModal);
 });
-// to-do: make sure form validation works and close modal (i think it works)
+
 avatarForm.addEventListener("submit", handleAvatarSubmit);
 
 editFormElement.addEventListener("submit", handleEditFormSubmit);
