@@ -22,7 +22,9 @@
 }
 
 .profile__avatar::after {
-  content: "Edit Abvatar";
+  content: "Edit Avatar";
+  color: white;
+  font-size: 16px;
 }
 
 .profile__avatar-container:hover .profile__avatar-btn {

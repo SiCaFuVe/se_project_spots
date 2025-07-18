@@ -22,7 +22,7 @@ api
       const cardEl = getCardElement(item);
       cardsList.append(cardEl);
     });
-    console.log(userInfo);
+    // console.log(userInfo);
     profileName.textContent = userInfo.name;
     profileDescription.textContent = userInfo.about;
     avatarImage.src = userInfo.avatar;
@@ -67,11 +67,11 @@ const avatarForm = avatarModal.querySelector(".modal__form");
 const avatarSubmitButton = avatarModal.querySelector(".modal__submit-btn");
 const avatarModalCloseBtn = avatarModal.querySelector(".modal__close-btn");
 const avatarLinkInput = avatarModal.querySelector("#profile-avatar-input");
-const deleteSubmitButton = document.querySelector("#modal__submit-btn_delete");
+const deleteSubmitButton = document.querySelector(".modal__submit-btn_delete");
 
 // Delete form elements
 const deleteModal = document.querySelector("#delete-modal");
-const deleteForm = document.querySelector(".modal__form");
+const deleteForm = document.querySelector("#delete-form");
 
 // Preview image pop ups
 const previewModal = document.querySelector("#preview-modal");
@@ -108,9 +108,10 @@ function getCardElement(data) {
 
   cardImageEl.addEventListener("click", () => handleImageClick(data));
 
-  cardDeleteBtn.addEventListener("click", (evt) =>
-    handleDeleteCard(cardElement, data._id)
-  );
+  cardDeleteBtn.addEventListener("click", (evt) => {
+    console.log(data);
+    handleDeleteCard(cardElement, data._id);
+  });
 
   return cardElement;
 }
@@ -185,15 +186,16 @@ function handleEditFormSubmit(evt) {
 }
 
 function handleDeleteCard(cardElement, cardId) {
+  console.log(cardElement);
   selectedCard = cardElement;
   selectedCardId = cardId;
+
   openModal(deleteModal);
 }
-
+//  const deleteSubmitButton =
 function handleDeleteSubmit(evt) {
   evt.preventDefault();
   setButtonText(deleteSubmitButton, true, "Delete", "Deleting...");
-  console.log(deleteSubmitButton); //check if it shows up
   api
     .deleteCard(selectedCardId)
     .then(() => {
@@ -211,6 +213,7 @@ deleteForm.addEventListener("submit", handleDeleteSubmit);
 function handleCardSubmit(evt) {
   evt.preventDefault();
   const inputValues = { name: cardNameInput.value, link: cardLinkInput.value };
+  api.postCard(inputValues);
   const cardEl = getCardElement(inputValues);
   cardsList.prepend(cardEl);
   console.log(cardSubmitButton);
