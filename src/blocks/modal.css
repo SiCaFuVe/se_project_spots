@@ -153,6 +153,10 @@
 
 /* modifiers for delete and cancel how to style #delete modal flex container */
 
+#delete-modal {
+  display: flex;
+}
+
 .modal__submit-btn_delete {
   background-color: rgba(255, 101, 101, 1);
   color: black;
