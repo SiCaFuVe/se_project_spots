@@ -3,6 +3,7 @@ import {
   enableValidation,
   settings,
   resetValidation,
+  disableButton,
 } from "../scripts/validation.js";
 import Api from "../utils/Api.js";
 import { setButtonText } from "../utils/helpers.js";
@@ -68,6 +69,7 @@ const avatarSubmitButton = avatarModal.querySelector(".modal__submit-btn");
 const avatarModalCloseBtn = avatarModal.querySelector(".modal__close-btn");
 const avatarLinkInput = avatarModal.querySelector("#profile-avatar-input");
 const deleteSubmitButton = document.querySelector(".modal__submit-btn_delete");
+const deleteCancelButton = document.querySelector(".modal__submit-btn_cancel");
 
 // Delete form elements
 const deleteModal = document.querySelector("#delete-modal");
@@ -96,6 +98,9 @@ function getCardElement(data) {
   cardNameEl.textContent = data.name;
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
+  if (data.isLiked) {
+    cardLikeBtn.classList.add("card__like-button-liked");
+  }
 
   cardImageEl.addEventListener("click", () => {
     openModal(previewModal);
@@ -218,7 +223,7 @@ function handleCardSubmit(evt) {
       const cardEl = getCardElement(cardData);
       cardsList.prepend(cardEl);
       console.log(cardSubmitButton);
-      //disableButton(cardSubmitButton, settings);
+      disableButton(cardSubmitButton, settings);
       closeModal(cardModal);
       evt.target.reset();
     })
@@ -237,6 +242,7 @@ function handleAvatarSubmit(evt) {
       avatarImage.src = data.avatar;
       closeModal(avatarModal);
       avatarForm.reset(avatarModal);
+      disableButton(avatarSubmitButton, settings);
     })
     .catch((err) => console.error("Failed to update avatar", err))
     .finally(() => {
@@ -256,13 +262,14 @@ profileEditButton.addEventListener("click", () => {
 });
 
 cardModalBtn.addEventListener("click", () => {
-  resetValidation(cardForm, [cardNameInput, cardLinkInput], settings);
   openModal(cardModal);
 });
 
 avatarModalBtn.addEventListener("click", () => {
-  resetValidation(avatarForm, [avatarLinkInput], settings);
   openModal(avatarModal);
+});
+deleteCancelButton.addEventListener("click", () => {
+  closeModal(deleteModal);
 });
 
 avatarForm.addEventListener("submit", handleAvatarSubmit);
